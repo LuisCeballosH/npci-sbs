@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="form-label">
+    <label >
       <strong>1.7. Checklist</strong>
     </label>
     <p>Indicar si el NPCI implica algún impacto en los siguientes aspectos:</p>

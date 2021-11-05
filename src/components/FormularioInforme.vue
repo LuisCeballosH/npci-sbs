@@ -3,7 +3,7 @@
     <form @submit.prevent="onSubmit">
       <h5>1. Información del nuevo producto o cambio importante (NPCI)</h5>
       <div class="mb-3">
-        <label class="form-label"><strong>1.1. Clasificación*</strong></label>
+        <label><strong>1.1. Clasificación*</strong></label>
         <select
           class="form-select"
           v-model="clasificacion"
@@ -14,13 +14,13 @@
         </select>
       </div>
       <div class="mb-3">
-        <label class="form-label">
+        <label>
           <strong> 1.2. Nombre del nuevo producto o cambio importante* </strong>
         </label>
         <input type="text" class="form-control" v-model="nombre" />
       </div>
       <div class="mb-3">
-        <label class="form-label">
+        <label>
           <strong>
             1.3. Antecedentes y/o problemática que se busca resolver con el NPCI
           </strong>
@@ -32,20 +32,34 @@
         ></textarea>
       </div>
       <div class="mb-3">
-        <label class="form-label">
+        <label>
           <strong>
             1.4. Descripción del nuevo producto o cambio importante*
           </strong>
         </label>
+        <p class="m-0">
+          Nuevo producto: incluir descripción del producto, proceso operativo
+          asociado, canales y mercado objetivo.
+        </p>
+        <p>
+          Cambio importante: breve descripción del cambio, indicando el objetivo
+          que la empresa busca alcanzar
+        </p>
         <textarea
           class="form-control"
           rows="3"
           v-model="descripcion"
         ></textarea>
       </div>
-      <button type="button" class="btn btn-link">Ver archivo</button>
+      <p>
+        En caso amerita, adjuntar (i) manual del producto y/o (ii) el flujograma
+        del nuevo proceso indicado
+      </p>
+      <button class="btn btn-link mb-3" type="button" @click="onClick">
+        Adjuntar archivo
+      </button>
       <div class="my-3">
-        <label class="form-label">
+        <label>
           <strong>
             1.5. Descripción del soporte informático relacionado al nuevo
             producto o cambio importante
@@ -63,7 +77,10 @@
           v-model="descripcionSoporte"
         ></textarea>
       </div>
-      <button type="button" class="btn btn-link">Ver archivo</button>
+      <p>Adjuntar esquema o documentación de sustento adicional</p>
+      <button class="btn btn-link mb-3" type="button" @click="onClick">
+        Adjuntar archivo
+      </button>
       <div class="my-3 row">
         <label class="col-auto col-form-label">
           <strong> {{ labelFecha }} </strong>
@@ -76,7 +93,7 @@
       <checklist :impactos="impactos" :aspectos="aspectos" />
 
       <h5>2. Informe integral de riesgos</h5>
-      <label class="form-label">
+      <label>
         <strong>2.1. Tipos de riesgos asociados*</strong>
       </label>
       <p>
@@ -170,6 +187,103 @@
           a conducta de mercado.
         </label>
       </div>
+      <label>
+        <strong>2.2. Riesgos asociados con la gestión del proyecto</strong>
+      </label>
+      <tabla-riesgos-asociados :id="'fileOne'" />
+      <label>
+        <strong>2.3. Riesgos del nuevo producto o cambio importante</strong>
+      </label>
+      <tabla-riesgos-asociados :id="'fileTwo'" />
+      <label>
+        <strong>2.4. Informe detallado de riesgos de LAFT</strong>
+      </label>
+      <p>
+        Cargue copia del informe detallado de riesgos LAFT elaborado por el
+        oficial de cumplimiento de la entidad
+      </p>
+      <button class="btn btn-link mb-3" type="button" @click="onClick">
+        Adjuntar archivo
+      </button>
+      <label>
+        <strong>2.5. Aspectos evaluados de controles de mercado</strong>
+      </label>
+      <tabla-laft />
+
+      <h5>3. Aprobación del informe de riesgo</h5>
+      <div class="mb-3">
+        <label>
+          Resumen de los principales acuerdos tomados por el comité de riesgo o
+          comité especializado*
+        </label>
+        <textarea
+          class="form-control"
+          rows="3"
+          v-model="antecedentes"
+        ></textarea>
+      </div>
+
+      <div class="mb-3 row align-items-center">
+        <label class="col-auto">
+          Acta del comité de riesgos que aprobó el informe de riesgo*
+        </label>
+        <div class="col-auto">
+          <button class="btn btn-link" type="button" @click="onClick">
+            Adjuntar archivo (.pdf)
+          </button>
+        </div>
+      </div>
+      <div class="mb-3 row align-items-center">
+        <label class="col-auto">
+          Fecha de aprobación del informe por parte del comité de riesgos*
+        </label>
+        <div class="col-auto">
+          <input type="date" class="form-control" />
+        </div>
+      </div>
+
+      <h5>4. Comentarios adicionales</h5>
+      <div class="mb-3">
+        <textarea
+          class="form-control"
+          rows="3"
+          v-model="antecedentes"
+        ></textarea>
+      </div>
+
+      <button class="btn btn-link mb-3" type="button" @click="onClick">
+        Adjuntar archivo
+      </button>
+
+      <h5>5. Asociación con un informe previo</h5>
+      <h5>6. Datos de contacto</h5>
+      <div class="mb-3 row align-items-center justify-content-center">
+        <label class="col-2"> Nombre* </label>
+        <div class="col-6">
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="mb-3 row align-items-center justify-content-center">
+        <label class="col-2"> Cargo* </label>
+        <div class="col-6">
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="mb-3 row align-items-center justify-content-center">
+        <label class="col-2"> Teléfono* </label>
+        <div class="col-6">
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="mb-3 row align-items-center justify-content-center">
+        <label class="col-2"> Correo* </label>
+        <div class="col-6">
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+
+      <input type="file" class="d-none" name="" id="file" />
+
       <div class="row d-flex justify-content-end gx-2">
         <div class="col-auto">
           <button type="submit" class="btn btn-primary">Primary</button>
@@ -187,8 +301,14 @@
 
 <script>
 import Checklist from "../components/Checklist.vue";
+import TablaLaft from "./TablaLaft.vue";
+import TablaRiesgosAsociados from "./TablaRiesgosAsociados.vue";
 export default {
-  components: { Checklist },
+  components: {
+    Checklist,
+    TablaRiesgosAsociados,
+    TablaLaft,
+  },
   name: "FormularioInforme",
   data() {
     return {
@@ -344,6 +464,9 @@ export default {
         this.labelFecha =
           "1.6. Fecha estimada de implementación del cambio importante*";
       }
+    },
+    onClick() {
+      document.getElementById("file").click();
     },
     onSubmit() {
       console.log("onSubmit");
