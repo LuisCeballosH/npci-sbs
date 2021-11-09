@@ -1,0 +1,56 @@
+[
+    {
+        "key": "003000",
+        "value": "On boarding digital",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "003001",
+        "value": "Billeteras electrónicas",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "003002",
+        "value": "Firma digital",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "003003",
+        "value": "Alianzas fintech",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "003004",
+        "value": "Procesamiento en nube",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "003005",
+        "value": "Digitalizacion de procesos o transformación digital de su empresa",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "003006",
+        "value": "Ingreso a nuevos mercados",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "003007",
+        "value": "Impl. o modificación de algún modelo de riesgos (crédito, mercado, liquidez, operacional o LAFT)",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "003008",
+        "value": "Impl. o modificación de alguna metodología de riesgos (Crédito, mercado, liquidez u operacional)",
+        "value1": "100",
+        "value2": null
+    }
+]

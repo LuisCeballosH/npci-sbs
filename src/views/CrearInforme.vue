@@ -9,9 +9,16 @@
 
 <script>
 import FormularioInforme from "../components/FormularioInforme.vue";
+import { mapActions } from "vuex";
 export default {
   components: { FormularioInforme },
   name: "CrearInforme",
+  methods: {
+    ...mapActions("crear", ["getData"]),
+  },
+  created() {
+    this.getData();
+  },
 };
 </script>
 

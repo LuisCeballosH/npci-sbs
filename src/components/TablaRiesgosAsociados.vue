@@ -1,26 +1,18 @@
 <template>
   <div>
+    <formulario-riesgos-asociados-one
+      :riesgoAsociado="riesgoAsociado"
+      :riesgosEvaluados="riesgosEvaluados"
+      :riesgosOtros="riesgosOtros"
+      :riesgoRelevante="riesgoRelevante"
+      :respuestaRiesgo="respuestaRiesgo"
+      :exposicionEstimadaRiesgo="exposicionEstimadaRiesgo"
+      :riesgoAceptado="riesgoAceptado"
+      @action="onSubmit"
+    />
     <div class="table-responsive">
       <table class="table table-bordered table-sm" aria-label="">
         <thead>
-          <tr class="row-one">
-            <th scope="col"></th>
-            <th scope="col" colspan="3">
-              <formulario-riesgos-asociados-one />
-            </th>
-            <th scope="col"></th>
-            <th scope="col" colspan="4">
-              <formulario-riesgos-asociados-two />
-            </th>
-            <th scope="col"></th>
-            <th scope="col">
-              <div class="d-grid mb-3">
-                <button class="btn btn-primary" type="button">
-                  Agregar riesgo
-                </button>
-              </div>
-            </th>
-          </tr>
           <tr>
             <th
               scope="col"
@@ -39,7 +31,7 @@
             <th scope="col" colspan="3" class="text-center">
               Respuesta al riesgo
             </th>
-            <th scope="col"></th>
+            <th scope="col" class="text-center" rowspan="2">Eliminar</th>
           </tr>
           <tr>
             <th scope="col" class="text-center">Descripción del riesgo</th>
@@ -59,62 +51,150 @@
             <th scope="col" class="text-center">
               Medida de tratamiento propuestas
             </th>
-            <th scope="col" class="text-center">Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row" class="text-center">1</th>
+          <tr v-for="(item, index) in riesgosAsociadosData" :key="index">
+            <th scope="row" class="text-center">{{ index + 1 }}</th>
+            <td>{{ item.descripcion }}</td>
+            <td>{{ riesgosEvaluadosValue(item.levelZero) }}</td>
+            <td>{{ riesgosOtrosValue(item.levelOne) }}</td>
             <td></td>
+            <td>{{ riesgoRelevanteValue(item.considerado) }}</td>
+            <td>{{ exposicionEstimadaRiesgoValue(item.estimada) }}</td>
+            <td>{{ riesgoAceptadoValue(item.aceptado) }}</td>
+            <td>{{ respuestaRiesgoValue(item.respuesta) }}</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="text-center">
+              <button
+                class="btn btn-link m-0 p-0"
+                @click="onDelete(index)"
+                v-b-tooltip.hover
+                title="Eliminar"
+              >
+                <b-icon icon="trash" variant="danger" font-scale="1.5"></b-icon>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <input type="file" class="d-none" name="" :id="id" />
-    <button class="btn btn-link mb-3" type="button" @click="onClick">
+    <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
       Carga masiva (.xls o .xlsx)
     </button>
   </div>
 </template>
 
 <script>
-import FormularioRiesgosAsociadosOne from "./FormularioRiesgosAsociadosOne.vue";
-import FormularioRiesgosAsociadosTwo from "./FormularioRiesgosAsociadosTwo.vue";
+import { mapState } from "vuex";
+import FormularioRiesgosAsociadosOne from "./FormularioRiesgosAsociados.vue";
 export default {
-  components: { FormularioRiesgosAsociadosOne, FormularioRiesgosAsociadosTwo },
+  components: { FormularioRiesgosAsociadosOne },
   name: "TablaRiesgosAsociados",
   props: {
     id: { type: String, require: true },
+  },
+  data() {
+    return {
+      riesgosAsociadosData: [],
+      riesgoAsociado: {
+        levelZero: "",
+        levelOne: "",
+        considerado: "",
+        estimada: "",
+        aceptado: "",
+        respuesta: "",
+        descripcion: "",
+      },
+    };
+  },
+  computed: {
+    ...mapState("crear", [
+      "riesgosEvaluados",
+      "riesgosOtros",
+      "riesgoRelevante",
+      "exposicionEstimadaRiesgo",
+      "respuestaRiesgo",
+      "riesgoAceptado",
+    ]),
+    riesgosEvaluadosValue() {
+      return (value) => {
+        const result = this.riesgosEvaluados.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
+    riesgosOtrosValue() {
+      return (value) => {
+        const result = this.riesgosOtros.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
+    riesgoRelevanteValue() {
+      return (value) => {
+        const result = this.riesgoRelevante.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
+    exposicionEstimadaRiesgoValue() {
+      return (value) => {
+        const result = this.exposicionEstimadaRiesgo.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
+    riesgoAceptadoValue() {
+      return (value) => {
+        const result = this.riesgoAceptado.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
+    respuestaRiesgoValue() {
+      return (value) => {
+        const result = this.respuestaRiesgo.find(
+          (element) => element.key === value
+        );
+        return result && result.value;
+      };
+    },
   },
   methods: {
     onClick() {
       document.getElementById(this.id).click();
     },
+    onSubmit() {
+      this.riesgosAsociadosData = [
+        this.riesgoAsociado,
+        ...this.riesgosAsociadosData,
+      ];
+      this.riesgoAsociado = {
+        levelZero: "",
+        levelOne: "",
+        considerado: "",
+        estimada: "",
+        aceptado: "",
+        respuesta: "",
+        descripcion: "",
+      };
+    },
+    onDelete(index) {
+      this.riesgosAsociadosData.splice(index, 1);
+    },
   },
 };
 </script>
 
-
 <style scoped>
-table thead .row-one,
-table thead .row-one th {
-  border-top-color: #fff;
-  border-right-color: #fff;
-  border-left-color: #fff;
-}
-table tbody td {
-  min-width: 200px;
-}
-table tbody th {
-  min-width: 100px;
+.table-responsive {
+  overflow-y: hidden;
 }
 </style>

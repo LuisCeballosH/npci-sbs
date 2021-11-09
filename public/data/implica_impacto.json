@@ -1,0 +1,74 @@
+[
+    {
+        "key": "002000",
+        "value": "Productos o servicios existentes - backoffice",
+        "value1": "1",
+        "value2": null
+    },
+    {
+        "key": "002001",
+        "value": "Productos o servicios existentes - frontoffice",
+        "value1": "1",
+        "value2": null
+    },
+    {
+        "key": "002002",
+        "value": "Canales de atención",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "002003",
+        "value": "Normativa interna de la empresa (políticas, manuales, procedimeintos, etc)",
+        "value1": "1",
+        "value2": null
+    },
+    {
+        "key": "002004",
+        "value": "Estructura organizativa",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "002005",
+        "value": "Sedes (oficinas, centros de procesamiento, agencias, etc)",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "002006",
+        "value": "Hardware",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "002007",
+        "value": "Software - Sistema informático principal (Core)",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "002008",
+        "value": "Software - Otros",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "002009",
+        "value": "Procesamiento de datos en el exterior",
+        "value1": "100",
+        "value2": null
+    },
+    {
+        "key": "002010",
+        "value": "Bienes o servicios provistos por terceros",
+        "value1": "50",
+        "value2": null
+    },
+    {
+        "key": "002011",
+        "value": "Pólizas de seguro",
+        "value1": "1",
+        "value2": null
+    }
+]

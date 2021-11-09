@@ -1,0 +1,56 @@
+[
+    {
+        "key": "004000",
+        "value": "Riesgo de Crédito",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004001",
+        "value": "Riesgo de Mercado",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004002",
+        "value": "Riesgo de Reaseguro",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004003",
+        "value": "Riesgo de lavado de activos y financiamiento del terrorismo (LAFT)",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004004",
+        "value": "Riesgo de Reputación",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004005",
+        "value": "Riesgo Estratégico",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004006",
+        "value": "Riesgo de Liquidez",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004007",
+        "value": "Riesgo Técnico",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "004008",
+        "value": "Riesgo Operacional",
+        "value1": null,
+        "value2": null
+    }
+]

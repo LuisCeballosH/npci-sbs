@@ -1,0 +1,44 @@
+[
+    {
+        "key": "008000",
+        "value": "Disminuir la probabilidad de ocurrencia",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008001",
+        "value": "Disminuir el impacto",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008002",
+        "value": "Transferir total o parcial el riesgo",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008003",
+        "value": "Evitar el riesgo",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008004",
+        "value": "Combinación de medidas anteriores",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008005",
+        "value": "Otro",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "008006",
+        "value": "Ninguno",
+        "value1": null,
+        "value2": null
+    }
+]

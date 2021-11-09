@@ -1,0 +1,44 @@
+[
+    {
+        "key": "005000",
+        "value": "Fraude interno",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005001",
+        "value": "Fraude externo",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005002",
+        "value": "Relaciones laborales y seguridad en el puesto de trabajo",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005003",
+        "value": "Clientes, productos y prácticas empresariales / Prácticas de negocio",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005004",
+        "value": "Daños a activos materiales",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005005",
+        "value": "Interrupción del negocio y fallos en los sistemas",
+        "value1": null,
+        "value2": null
+    },
+    {
+        "key": "005006",
+        "value": "Ejecución, entrega y gestión de procesos",
+        "value1": null,
+        "value2": null
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "idInforme": 41,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001000",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013002",
+        "descEstado": "Finalizado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 44,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 61,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013002",
+        "descEstado": "Finalizado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 62,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 63,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 64,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 65,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 66,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    },
+    {
+        "idInforme": 67,
+        "codExpediente": "123456789000",
+        "tipoInforme": "001",
+        "nombreNpci": "Informe NPCI 001",
+        "fechaLanzImpl": "2021-10-20 00:00:00.0",
+        "fechaEnvio": "2021-11-07 14:28:34.0",
+        "idEstado": "013001",
+        "descEstado": "Enviado",
+        "isEditar": null,
+        "isEliminar": null
+    }
+]

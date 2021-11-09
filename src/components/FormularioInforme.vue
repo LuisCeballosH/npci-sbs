@@ -2,24 +2,35 @@
   <div>
     <form @submit.prevent="onSubmit">
       <h5>1. Información del nuevo producto o cambio importante (NPCI)</h5>
-      <div class="mb-3">
+      <div class="mb-5">
         <label><strong>1.1. Clasificación*</strong></label>
         <select
           class="form-select"
           v-model="clasificacion"
+          name="clasificacion"
+          v-validate="'required'"
           @change="onClasificacion"
         >
-          <option value="1">Nuevo producto</option>
-          <option value="2">Cambio importante</option>
+          <option v-for="item in tipoInforme" :key="item.key" :value="item.key">
+            {{ item.value }}
+          </option>
         </select>
+        <div class="invalid-feedback">El campo es requerido.</div>
       </div>
-      <div class="mb-3">
+      <div class="mb-5">
         <label>
           <strong> 1.2. Nombre del nuevo producto o cambio importante* </strong>
         </label>
-        <input type="text" class="form-control" v-model="nombre" />
+        <input
+          type="text"
+          class="form-control"
+          v-model="producto"
+          v-validate="'required'"
+          name="producto"
+        />
+        <div class="invalid-feedback">El campo es requerido.</div>
       </div>
-      <div class="mb-3">
+      <div class="mb-5">
         <label>
           <strong>
             1.3. Antecedentes y/o problemática que se busca resolver con el NPCI
@@ -31,7 +42,7 @@
           v-model="antecedentes"
         ></textarea>
       </div>
-      <div class="mb-3">
+      <div class="mb-5">
         <label>
           <strong>
             1.4. Descripción del nuevo producto o cambio importante*
@@ -49,16 +60,19 @@
           class="form-control"
           rows="3"
           v-model="descripcion"
+          v-validate="'required'"
+          name="descripcion"
         ></textarea>
+        <div class="invalid-feedback">El campo es requerido.</div>
+        <p>
+          En caso amerita, adjuntar (i) manual del producto y/o (ii) el
+          flujograma del nuevo proceso indicado
+        </p>
+        <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
+          Adjuntar archivo
+        </button>
       </div>
-      <p>
-        En caso amerita, adjuntar (i) manual del producto y/o (ii) el flujograma
-        del nuevo proceso indicado
-      </p>
-      <button class="btn btn-link mb-3" type="button" @click="onClick">
-        Adjuntar archivo
-      </button>
-      <div class="my-3">
+      <div class="mb-5">
         <label>
           <strong>
             1.5. Descripción del soporte informático relacionado al nuevo
@@ -76,23 +90,100 @@
           rows="3"
           v-model="descripcionSoporte"
         ></textarea>
+
+        <p>Adjuntar esquema o documentación de sustento adicional</p>
+        <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
+          Adjuntar archivo
+        </button>
       </div>
-      <p>Adjuntar esquema o documentación de sustento adicional</p>
-      <button class="btn btn-link mb-3" type="button" @click="onClick">
-        Adjuntar archivo
-      </button>
-      <div class="my-3 row">
-        <label class="col-auto col-form-label">
+      <div class="mb-5 row">
+        <label class="col-auto">
           <strong> {{ labelFecha }} </strong>
         </label>
         <div class="col-auto">
-          <input type="date" class="form-control" v-model="fecha" />
+          <input
+            type="date"
+            class="form-control"
+            v-model="fecha"
+            v-validate="'required|date_format:yyyy-MM-dd'"
+            name="fecha"
+          />
+          <div class="invalid-feedback">El campo es requerido.</div>
         </div>
       </div>
 
-      <checklist :impactos="impactos" :aspectos="aspectos" />
+      <label>
+        <strong>1.7. Checklist</strong>
+      </label>
+      <p>
+        Indicar si el NPCI implica algún impacto en los siguientes aspectos:
+      </p>
+      <div class="mb-3 row justify-content-end">
+        <div class="col-5">Precise brevemente su respuesta</div>
+      </div>
+      <div
+        class="mb-3 row"
+        v-for="impacto in implicaImpacto"
+        :key="impacto.key"
+      >
+        <div class="col-1">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="impacto.selected"
+              :id="impacto.key"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <label :for="impacto.key"> {{ impacto.value }} </label>
+        </div>
+        <div class="col-5">
+          <input
+            type="text"
+            class="form-control"
+            v-validate="{
+              required: impacto.selected,
+            }"
+            :name="impacto.key"
+            v-model="impacto.comment"
+          />
+        </div>
+      </div>
+      <p>El NPCI incorpora alguno de los siguientes aspectos:</p>
+      <div
+        class="mb-3 row"
+        v-for="aspecto in incorporaAspecto"
+        :key="aspecto.key"
+      >
+        <div class="col-1">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="aspecto.selected"
+              :id="aspecto.key"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <label :for="aspecto.key"> {{ aspecto.value }} </label>
+        </div>
+        <div class="col-5">
+          <input
+            type="text"
+            class="form-control"
+            v-validate="{
+              required: aspecto.selected,
+            }"
+            :name="aspecto.key"
+            v-model="aspecto.comment"
+          />
+        </div>
+      </div>
 
-      <h5>2. Informe integral de riesgos</h5>
+      <h5 class="my-5">2. Informe integral de riesgos</h5>
       <label>
         <strong>2.1. Tipos de riesgos asociados*</strong>
       </label>
@@ -102,113 +193,74 @@
         cambio importante
       </p>
       <div class="mb-3 row">
-        <div class="col-4">
+        <div class="col-4" v-for="riesgo in riesgosEvaluados" :key="riesgo.key">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo de Crédito </label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo de Mercado</label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo de Reaseguro</label>
-          </div>
-        </div>
-      </div>
-      <div class="mb-3 row">
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">
-              Riesgo de lavado de activos y financiamiento del terrorismo (LAFT)
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="riesgo.selected"
+              :id="riesgo.key"
+              @change="changeRiesgosAsociados()"
+              :class="{ 'is-invalid': riesgosAsociados }"
+            />
+            <label class="form-check-label" :for="riesgo.key">
+              {{ riesgo.value }}
             </label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo de Reputación</label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo Estratégico</label>
-          </div>
-        </div>
-      </div>
-      <div class="mb-3 row">
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">Riesgo de Liquidez </label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">Riesgo Técnico</label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Riesgo Operacional</label>
           </div>
         </div>
       </div>
       <p>Adicionalmente, seleccione las opciones que correspondan:</p>
 
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" />
-        <label class="form-check-label">
-          Entre los riesgos operacionales evaluados se han considerado los
-          riesgos asociados a la seguridad de la información y la ciberseguridad
-          (SI-C)
+      <div
+        class="form-check"
+        v-for="opcion in opcionesCorrespondan"
+        :key="opcion.key"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          v-model="opcion.selected"
+          :id="opcion.key"
+          @change="changeRiesgosAsociados()"
+          :class="{ 'is-invalid': riesgosAsociados }"
+        />
+        <label class="form-check-label" :for="opcion.key">
+          {{ opcion.value }}
         </label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" />
-        <label class="form-check-label">
-          Entre los riesgos operacionales evaluados se han considerado los
-          riesgos asociados a la continuidad del negocio
-        </label>
+      <div v-if="riesgosAsociados" class="text-danger form-text">
+        El campo es requerido.
       </div>
-      <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" />
-        <label class="form-check-label">
-          Como resultado de la evaluación se identificaron aspectos relacionados
-          a conducta de mercado.
+      <div class="my-5">
+        <label>
+          <strong>2.2. Riesgos asociados con la gestión del proyecto</strong>
         </label>
+        <tabla-riesgos-asociados :id="'fileOne'" />
       </div>
-      <label>
-        <strong>2.2. Riesgos asociados con la gestión del proyecto</strong>
-      </label>
-      <tabla-riesgos-asociados :id="'fileOne'" />
-      <label>
-        <strong>2.3. Riesgos del nuevo producto o cambio importante</strong>
-      </label>
-      <tabla-riesgos-asociados :id="'fileTwo'" />
-      <label>
-        <strong>2.4. Informe detallado de riesgos de LAFT</strong>
-      </label>
-      <p>
-        Cargue copia del informe detallado de riesgos LAFT elaborado por el
-        oficial de cumplimiento de la entidad
-      </p>
-      <button class="btn btn-link mb-3" type="button" @click="onClick">
-        Adjuntar archivo
-      </button>
-      <label>
-        <strong>2.5. Aspectos evaluados de controles de mercado</strong>
-      </label>
-      <tabla-laft />
+      <div class="mb-5">
+        <label>
+          <strong>2.3. Riesgos del nuevo producto o cambio importante</strong>
+        </label>
+        <tabla-riesgos-asociados :id="'fileTwo'" />
+      </div>
+      <div class="mb-5">
+        <label>
+          <strong>2.4. Informe detallado de riesgos de LAFT</strong>
+        </label>
+        <p>
+          Cargue copia del informe detallado de riesgos LAFT elaborado por el
+          oficial de cumplimiento de la entidad
+        </p>
+        <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
+          Adjuntar archivo
+        </button>
+      </div>
+      <div class="mb-5">
+        <label class="d-block">
+          <strong>2.5. Aspectos evaluados de controles de mercado</strong>
+        </label>
+        <tabla-aspectos-evaluados />
+      </div>
 
       <h5>3. Aprobación del informe de riesgo</h5>
       <div class="mb-3">
@@ -228,12 +280,12 @@
           Acta del comité de riesgos que aprobó el informe de riesgo*
         </label>
         <div class="col-auto">
-          <button class="btn btn-link" type="button" @click="onClick">
+          <button class="btn btn-link m-0 p-0" type="button" @click="onClick">
             Adjuntar archivo (.pdf)
           </button>
         </div>
       </div>
-      <div class="mb-3 row align-items-center">
+      <div class="mb-5 row align-items-center">
         <label class="col-auto">
           Fecha de aprobación del informe por parte del comité de riesgos*
         </label>
@@ -243,42 +295,92 @@
       </div>
 
       <h5>4. Comentarios adicionales</h5>
-      <div class="mb-3">
+      <div class="mb-5">
         <textarea
           class="form-control"
           rows="3"
           v-model="antecedentes"
         ></textarea>
+
+        <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
+          Adjuntar archivo
+        </button>
       </div>
 
-      <button class="btn btn-link mb-3" type="button" @click="onClick">
-        Adjuntar archivo
-      </button>
-
       <h5>5. Asociación con un informe previo</h5>
+
+      <div class="form-control-custom mb-3">
+        <div class="d-flex align-items-center flex-wrap container-badge">
+          <span
+            v-for="item in associates"
+            :key="item.idInforme"
+            class="
+              badge
+              bg-info
+              text-dark
+              rounded-pill
+              d-inline-block
+              my-1
+              me-1
+            "
+          >
+            <span class="d-inline-block me-1"> {{ item.nombreNpci }} </span>
+            <button type="button" class="btn-close"></button>
+          </span>
+        </div>
+      </div>
+      <tabla-historico />
       <h5>6. Datos de contacto</h5>
       <div class="mb-3 row align-items-center justify-content-center">
         <label class="col-2"> Nombre* </label>
         <div class="col-6">
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="nombre"
+            v-validate="'required'"
+            name="nombre"
+          />
+          <div class="invalid-feedback">El campo es requerido.</div>
         </div>
       </div>
       <div class="mb-3 row align-items-center justify-content-center">
         <label class="col-2"> Cargo* </label>
         <div class="col-6">
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="cargo"
+            v-validate="'required'"
+            name="cargo"
+          />
+          <div class="invalid-feedback">El campo es requerido.</div>
         </div>
       </div>
       <div class="mb-3 row align-items-center justify-content-center">
         <label class="col-2"> Teléfono* </label>
         <div class="col-6">
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="telefono"
+            v-validate="'required'"
+            name="telefono"
+          />
+          <div class="invalid-feedback">El campo es requerido.</div>
         </div>
       </div>
-      <div class="mb-3 row align-items-center justify-content-center">
+      <div class="mb-5 row align-items-center justify-content-center">
         <label class="col-2"> Correo* </label>
         <div class="col-6">
-          <input type="text" class="form-control" />
+          <input
+            type="email"
+            class="form-control"
+            v-model="correo"
+            v-validate="'required|email'"
+            name="correo"
+          />
+          <div class="invalid-feedback">El campo es requerido.</div>
         </div>
       </div>
 
@@ -286,13 +388,13 @@
 
       <div class="row d-flex justify-content-end gx-2">
         <div class="col-auto">
-          <button type="submit" class="btn btn-primary">Primary</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-success">Success</button>
+          <button type="button" class="btn btn-success">Enviar</button>
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-danger">Danger</button>
+          <button type="button" class="btn btn-danger">Cancelar</button>
         </div>
       </div>
     </form>
@@ -300,180 +402,104 @@
 </template>
 
 <script>
-import Checklist from "../components/Checklist.vue";
-import TablaLaft from "./TablaLaft.vue";
+import TablaAspectosEvaluados from "./TablaAspectosEvaluados.vue";
 import TablaRiesgosAsociados from "./TablaRiesgosAsociados.vue";
+import { mapState } from "vuex";
+import TablaHistorico from "./TablaHistorico.vue";
 export default {
-  components: {
-    Checklist,
-    TablaRiesgosAsociados,
-    TablaLaft,
-  },
   name: "FormularioInforme",
+  components: {
+    TablaRiesgosAsociados,
+    TablaAspectosEvaluados,
+    TablaHistorico,
+  },
   data() {
     return {
-      clasificacion: "1",
-      nombre: "",
+      clasificacion: "001000",
+      producto: "",
       antecedentes: "",
       descripcion: "",
       descripcionSoporte: "",
       labelFecha: "1.6. Fecha de lanzamiento del nuevo producto*",
       fecha: "",
-      impactos: [
-        {
-          id: 1,
-          selected: false,
-          description: "a. Productos o servicios existentes - backoffice",
-          answer: "",
-        },
-        {
-          id: 2,
-          selected: false,
-          description: "b. Productos o servicios existentes - frontoffice",
-          answer: "",
-        },
-        {
-          id: 3,
-          selected: false,
-          description: "c. Canales de atención",
-          answer: "",
-        },
-        {
-          id: 4,
-          selected: false,
-          description:
-            "d. Normativa interna de la empresa (políticas, manuales, procedimeintos, etc)",
-          answer: "",
-        },
-        {
-          id: 5,
-          selected: false,
-          description: "e. Estructura organizativa",
-          answer: "",
-        },
-        {
-          id: 6,
-          selected: false,
-          description:
-            "f. Sedes (oficinas, centros de procesamiento, agencias, etc)",
-          answer: "",
-        },
-        {
-          id: 7,
-          selected: false,
-          description: "g. Hardware",
-          answer: "",
-        },
-        {
-          id: 8,
-          selected: false,
-          description: "h. Software - Sistema informático principal (Core)",
-          answer: "",
-        },
-        {
-          id: 9,
-          selected: false,
-          description: "i. Software - Otros",
-          answer: "",
-        },
-        {
-          id: 10,
-          selected: false,
-          description: "j. Procesamiento de datos en el exterior",
-          answer: "",
-        },
-        {
-          id: 11,
-          selected: false,
-          description: "k. Bienes o servicios provistos por terceros",
-          answer: "",
-        },
-        {
-          id: 12,
-          selected: false,
-          description: "l. Pólizas de seguro",
-          answer: "",
-        },
-      ],
-      aspectos: [
-        {
-          id: 1,
-          selected: false,
-          description: "a. On boarding digital",
-          answer: "",
-        },
-        {
-          id: 2,
-          selected: false,
-          description: "b. Billeteras electrónicas",
-          answer: "",
-        },
-        {
-          id: 3,
-          selected: false,
-          description: "c. Firma digital",
-          answer: "",
-        },
-        {
-          id: 4,
-          selected: false,
-          description: "d. Alianzas fintech",
-          answer: "",
-        },
-        {
-          id: 5,
-          selected: false,
-          description: "e. Procesamiento en nube",
-          answer: "",
-        },
-        {
-          id: 6,
-          selected: false,
-          description:
-            "f. Digitalizacion de procesos o transformación digital de su empresa",
-          answer: "",
-        },
-        {
-          id: 7,
-          selected: false,
-          description: "g. Ingreso a nuevos mercados",
-          answer: "",
-        },
-        {
-          id: 8,
-          selected: false,
-          description:
-            "h. Implementación o modificación de algún modelo de riesgos (crédito, mercado, liquidez, operacional o LAFT)",
-          answer: "",
-        },
-        {
-          id: 9,
-          selected: false,
-          description:
-            "i. Implementación o modificación de alguna metodología de riesgos (Crédito, mercado, liquidez u operacional)",
-          answer: "",
-        },
-      ],
+      riesgosAsociados: false,
+      formSubmitAttempt: false,
+
+      nombre: "",
+      cargo: "",
+      telefono: "",
+      correo: "",
+      expression: {
+        required: true,
+      },
     };
+  },
+  computed: {
+    ...mapState("crear", [
+      "tipoInforme",
+      "implicaImpacto",
+      "incorporaAspecto",
+      "riesgosEvaluados",
+      "opcionesCorrespondan",
+    ]),
+    ...mapState("listar", ["associates"]),
   },
   methods: {
     onClasificacion() {
-      if (this.clasificacion === "1") {
+      if (this.clasificacion === "001000") {
         this.labelFecha = "1.6. Fecha de lanzamiento del nuevo producto*";
       } else {
         this.labelFecha =
           "1.6. Fecha estimada de implementación del cambio importante*";
       }
     },
+    changeRiesgosAsociados() {
+      if (this.formSubmitAttempt) {
+        const riesgosE = !this.riesgosEvaluados.find(
+          (element) => element.selected
+        );
+        const opcionesC = !this.opcionesCorrespondan.find(
+          (element) => element.selected
+        );
+        this.riesgosAsociados = riesgosE && opcionesC;
+      }
+    },
     onClick() {
       document.getElementById("file").click();
     },
-    onSubmit() {
-      console.log("onSubmit");
+    async onSubmit() {
+      this.formSubmitAttempt = true;
+      const riesgosE = !this.riesgosEvaluados.find(
+        (element) => element.selected
+      );
+      const opcionesC = !this.opcionesCorrespondan.find(
+        (element) => element.selected
+      );
+      this.riesgosAsociados = riesgosE && opcionesC;
+      const result = await this.$validator.validateAll();
+      if (result && !this.riesgosAsociados) {
+        console.log("onSubmit");
+      }
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.form-control-custom {
+  display: block;
+  width: 100%;
+  padding: 3px 12px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+.container-badge {
+  min-height: 30px;
+}
+.btn-close {
+  height: 0.5rem;
+  width: 0.5rem;
+  padding: 0;
+}
 </style>
