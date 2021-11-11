@@ -1,0 +1,242 @@
+{
+    "informe": {
+        "idInforme": 67,
+        "codEntVigilada": "00654",
+        "codExpediente": "123456789000",
+        "idEstado": "001000",
+        "nivel": "007",
+        "indActivo": 1
+    },
+    "informeDet": {
+        "idInformeDet": 87,
+        "idInforme": 67,
+        "tipoInforme": "001001",
+        "nombreNpci": "Informe NPCI 001",
+        "antecendentes": "antecedente 001",
+        "descripcion": "descripcion 001",
+        "descripcionSop": "descripcionSop 001",
+        "fecLanzImpl": "2021-10-20",
+        "aprobInforme": "Aprobación del informe de riesgo",
+        "fecAprob": "2021-10-20",
+        "comentAdic": "comentarios 001",
+        "indActivo": 1
+    },
+    "contacto": {
+        "nombre": "Jorge Roldan Daza",
+        "cargo": "Super Boss",
+        "telefono": "989898989",
+        "correo": "mijard@hotmail.com",
+        "codEntVigilada": "00654",
+        "indActivo": 1
+    },
+    "informesRelacionados": [
+        {
+            "idInformeRel": {
+                "idInformeDet": 27,
+                "idInforme": 67
+            },
+            "indActivo": 1
+        },
+        {
+            "idInformeRel": {
+                "idInformeDet": 41,
+                "idInforme": 67
+            },
+            "indActivo": 1
+        }
+    ],
+    "conductasMercado": [
+        {
+            "idCondMerc": 73,
+            "idInformeDet": 87,
+            "debIndent": "debilidad 1",
+            "rubro": "002",
+            "relevante": "003",
+            "medidas": "medida 1",
+            "controles": "controles 1",
+            "indActivo": 1
+        },
+        {
+            "idCondMerc": 74,
+            "idInformeDet": 87,
+            "debIndent": "debilidad 2",
+            "rubro": "003",
+            "relevante": "003",
+            "medidas": "medida 2",
+            "controles": "controles 2",
+            "indActivo": 1
+        }
+    ],
+    "gestionProdProy": [
+        {
+            "idGestProd": 53,
+            "idInformeDet": 87,
+            "tipGestProd": "002",
+            "descripcion": "Descripcion Gest Prod 1",
+            "tipoNivel0": "004",
+            "tipoNivel1": "005",
+            "relevante": "006",
+            "exposicion": "003",
+            "aceptado": "002",
+            "respuesta": "009",
+            "indActivo": 1,
+            "codigosPlan": null,
+            "codigosControl": null,
+            "controles": [
+                {
+                    "idControl": 77,
+                    "idGestProd": 53,
+                    "nombControl": "nombreControl 1",
+                    "detControl": "detalleControl 1",
+                    "nivelEfect": "003",
+                    "indActivo": 1
+                },
+                {
+                    "idControl": 78,
+                    "idGestProd": 53,
+                    "nombControl": "nombreControl 2",
+                    "detControl": "detalleControl 2",
+                    "nivelEfect": "004",
+                    "indActivo": 1
+                },
+                {
+                    "idControl": 79,
+                    "idGestProd": 53,
+                    "nombControl": "nombreControl 3",
+                    "detControl": "detalleControl 3",
+                    "nivelEfect": "001",
+                    "indActivo": 1
+                }
+            ],
+            "planes": [
+                {
+                    "idPlan": 97,
+                    "idGestProd": 53,
+                    "nombPlan": "nombrePlan 1",
+                    "detPlan": "detallePlan 1",
+                    "areaResp": "areaResp 1",
+                    "fecImplem": "02/12/2021",
+                    "indActivo": 1
+                },
+                {
+                    "idPlan": 98,
+                    "idGestProd": 53,
+                    "nombPlan": "nombrePlan 2",
+                    "detPlan": "detallePlan 2",
+                    "areaResp": "areaResp 2",
+                    "fecImplem": "02/01/2022",
+                    "indActivo": 1
+                },
+                {
+                    "idPlan": 99,
+                    "idGestProd": 53,
+                    "nombPlan": "nombrePlan 3",
+                    "detPlan": "detallePlan 3",
+                    "areaResp": "areaResp 3",
+                    "fecImplem": "02/02/2022",
+                    "indActivo": 1
+                }
+            ]
+        },
+        {
+            "idGestProd": 54,
+            "idInformeDet": 87,
+            "tipGestProd": "002",
+            "descripcion": "Descripcion Gest Prod 2",
+            "tipoNivel0": "004",
+            "tipoNivel1": "005",
+            "relevante": "006",
+            "exposicion": "003",
+            "aceptado": "002",
+            "respuesta": "009",
+            "indActivo": 1,
+            "codigosPlan": null,
+            "codigosControl": null,
+            "controles": [
+                {
+                    "idControl": 80,
+                    "idGestProd": 54,
+                    "nombControl": "nombreControl 1",
+                    "detControl": "detalleControl 1",
+                    "nivelEfect": "003",
+                    "indActivo": 1
+                },
+                {
+                    "idControl": 81,
+                    "idGestProd": 54,
+                    "nombControl": "nombreControl 2",
+                    "detControl": "detalleControl 2",
+                    "nivelEfect": "004",
+                    "indActivo": 1
+                },
+                {
+                    "idControl": 82,
+                    "idGestProd": 54,
+                    "nombControl": "nombreControl 3",
+                    "detControl": "detalleControl 3",
+                    "nivelEfect": "001",
+                    "indActivo": 1
+                }
+            ],
+            "planes": [
+                {
+                    "idPlan": 100,
+                    "idGestProd": 54,
+                    "nombPlan": "nombrePlan 1",
+                    "detPlan": "detallePlan 1",
+                    "areaResp": "areaResp 1",
+                    "fecImplem": "02/12/2021",
+                    "indActivo": 1
+                },
+                {
+                    "idPlan": 101,
+                    "idGestProd": 54,
+                    "nombPlan": "nombrePlan 2",
+                    "detPlan": "detallePlan 2",
+                    "areaResp": "areaResp 2",
+                    "fecImplem": "02/01/2022",
+                    "indActivo": 1
+                },
+                {
+                    "idPlan": 102,
+                    "idGestProd": 54,
+                    "nombPlan": "nombrePlan 3",
+                    "detPlan": "detallePlan 3",
+                    "areaResp": "areaResp 3",
+                    "fecImplem": "02/02/2022",
+                    "indActivo": 1
+                }
+            ]
+        }
+    ],
+    "riesgos": [
+        {
+            "idRiesgos": 73,
+            "idInformeDet": 87,
+            "tipoRiesgos": "002",
+            "indActivo": 1
+        },
+        {
+            "idRiesgos": 74,
+            "idInformeDet": 87,
+            "tipoRiesgos": "005",
+            "indActivo": 1
+        }
+    ],
+    "aspectos": [
+        {
+            "idImpactAspect": 53,
+            "idInformeDet": 87,
+            "tipoImpactAspect": "001",
+            "descripcion": "DESCRIPCION 1",
+            "indActivo": 1
+        },
+        {
+            "idImpactAspect": 54,
+            "idInformeDet": 87,
+            "tipoImpactAspect": "002",
+            "descripcion": "DESCRIPCION 2",
+            "indActivo": 1
+        }
+    ]
+}

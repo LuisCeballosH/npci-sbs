@@ -1,13 +1,13 @@
 <template>
   <div>
     <formulario-aspectos-evaluados
-      :aspectoEvaluado="aspectoEvaluado"
+      :conductaMercado="conductaMercado"
       :aspectoConducta="aspectoConducta"
       :rubro="rubro"
       @action="onSubmit"
     />
     <div class="table-responsive">
-      <table class="table table-bordered table-sm" aria-label="">
+      <table class="table table-bordered" aria-label="">
         <thead>
           <tr>
             <th
@@ -40,17 +40,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in aspectosEvaluadosData" :key="index">
+          <tr v-for="(item, index) in informe.conductasMercado" :key="index">
             <th scope="row" class="text-center">{{ index + 1 }}</th>
-            <td>{{ item.debilidad }}</td>
+            <td>{{ item.debIndent }}</td>
             <td>{{ rubroValue(item.rubro) }}</td>
             <td>{{ aspectoConductaValue(item.relevante) }}</td>
-            <td>{{ item.medida }}</td>
-            <td>{{ item.control }}</td>
+            <td>{{ item.medidas }}</td>
+            <td>{{ item.controles }}</td>
             <td class="text-center">
               <button
                 class="btn btn-link m-0 p-0"
-                @click="onDelete(index)"
+                type="button"
+                @click="onDelete(item)"
                 v-b-tooltip.hover
                 title="Eliminar"
               >
@@ -61,7 +62,7 @@
         </tbody>
       </table>
     </div>
-    <input type="file" class="d-none" name="" id="aspecto" />
+    <input type="file" class="d-none" name="" ref="aspecto" />
     <button class="btn btn-link p-0 m-0" type="button" @click="onClick">
       Carga masiva (.xls o .xlsx)
     </button>
@@ -70,24 +71,23 @@
 
 <script>
 import FormularioAspectosEvaluados from "./FormularioAspectosEvaluados.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   components: { FormularioAspectosEvaluados },
   name: "TablaAspectosEvaluados",
   data() {
     return {
-      aspectosEvaluadosData: [],
-      aspectoEvaluado: {
-        debilidad: "",
+      conductaMercado: {
+        debIndent: "",
         rubro: "",
         relevante: "",
-        medida: "",
-        control: "",
+        medidas: "",
+        controles: "",
       },
     };
   },
   computed: {
-    ...mapState("crear", ["aspectoConducta", "rubro"]),
+    ...mapState("crear", ["aspectoConducta", "rubro", "informe"]),
     rubroValue() {
       return (value) => {
         const result = this.rubro.find((element) => element.key === value);
@@ -104,15 +104,16 @@ export default {
     },
   },
   methods: {
+    ...mapActions("crear", [
+      "addConductaMercadoAction",
+      "deleteConductaMercadoAction",
+    ]),
     onClick() {
-      document.getElementById("aspecto").click();
+      this.$refs.aspecto.click();
     },
     onSubmit() {
-      this.aspectosEvaluadosData = [
-        this.aspectoEvaluado,
-        ...this.aspectosEvaluadosData,
-      ];
-      this.aspectoEvaluado = {
+      this.addConductaMercadoAction(this.conductaMercado);
+      this.conductaMercado = {
         debilidad: "",
         rubro: "",
         relevante: "",
@@ -120,8 +121,8 @@ export default {
         control: "",
       };
     },
-    onDelete(index) {
-      this.aspectosEvaluadosData.splice(index, 1);
+    onDelete(item) {
+      this.deleteConductaMercadoAction(item);
     },
   },
 };

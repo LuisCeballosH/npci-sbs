@@ -2,7 +2,7 @@
   <div class="mb-5">
     <filtros-historico />
     <div class="table-responsive">
-      <table class="table table-bordered table-sm" aria-label="">
+      <table class="table table-bordered " aria-label="">
         <thead>
           <tr>
             <th scope="col">N° Expediente</th>

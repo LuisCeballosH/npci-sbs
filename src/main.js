@@ -22,9 +22,6 @@ Vue.use(VeeValidate, {
 
 Vue.use(VueAxios, axios)
 
-// axios.defaults.baseURL = 'http://localhost:9080';
-axios.defaults.baseURL = 'data';
-
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons);
 Vue.use(IconsPlugin)

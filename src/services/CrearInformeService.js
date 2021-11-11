@@ -85,6 +85,13 @@ class CrearInformeService {
         // const response = await http.get('/npci.service/npci_api/tipos/riesgo_es_aceptado');
         return response.data;
     }
+
+    async saveInforme(informe) {
+        console.log(informe)
+        const response = await http.get('/save_informe.json');
+        // const response = await http.post('/npci.service/npci_api/informe_riesgos/save/informe', informe);
+        return response.data;
+    }
 }
 
 export default new CrearInformeService();

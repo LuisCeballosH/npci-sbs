@@ -11,7 +11,7 @@
       @action="onSubmit"
     />
     <div class="table-responsive">
-      <table class="table table-bordered table-sm" aria-label="">
+      <table class="table table-bordered" aria-label="">
         <thead>
           <tr>
             <th
@@ -59,12 +59,32 @@
             <td>{{ item.descripcion }}</td>
             <td>{{ riesgosEvaluadosValue(item.levelZero) }}</td>
             <td>{{ riesgosOtrosValue(item.levelOne) }}</td>
-            <td></td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-link m-0 p-0"
+                v-b-tooltip.hover
+                title="Agregar control"
+                @click="modalControlShow"
+              >
+                <b-icon icon="plus" variant="success" font-scale="1.5"></b-icon>
+              </button>
+            </td>
             <td>{{ riesgoRelevanteValue(item.considerado) }}</td>
             <td>{{ exposicionEstimadaRiesgoValue(item.estimada) }}</td>
             <td>{{ riesgoAceptadoValue(item.aceptado) }}</td>
             <td>{{ respuestaRiesgoValue(item.respuesta) }}</td>
-            <td></td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-link m-0 p-0"
+                v-b-tooltip.hover
+                title="Agregar plan"
+                @click="modalPlanShow"
+              >
+                <b-icon icon="plus" variant="success" font-scale="1.5"></b-icon>
+              </button>
+            </td>
             <td class="text-center">
               <button
                 class="btn btn-link m-0 p-0"
@@ -87,7 +107,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import FormularioRiesgosAsociadosOne from "./FormularioRiesgosAsociados.vue";
 export default {
   components: { FormularioRiesgosAsociadosOne },
@@ -168,6 +188,8 @@ export default {
     },
   },
   methods: {
+    ...mapActions("control", ["toggleModalControl"]),
+    ...mapActions("plan", ["toggleModalPlan"]),
     onClick() {
       document.getElementById(this.id).click();
     },
@@ -188,6 +210,12 @@ export default {
     },
     onDelete(index) {
       this.riesgosAsociadosData.splice(index, 1);
+    },
+    modalControlShow() {
+      this.toggleModalControl();
+    },
+    modalPlanShow() {
+      this.toggleModalPlan();
     },
   },
 };

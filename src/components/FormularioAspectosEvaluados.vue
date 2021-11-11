@@ -6,9 +6,9 @@
         <textarea
           class="form-control"
           rows="2"
-          v-model="aspectoEvaluado.debilidad"
+          v-model="conductaMercado.debIndent"
           v-validate="'required'"
-          name="debilidad"
+          name="debIndent"
         ></textarea>
         <div class="form-text">Caracteres 0/500</div>
       </div>
@@ -17,9 +17,9 @@
         <textarea
           class="form-control"
           rows="2"
-          v-model="aspectoEvaluado.medida"
+          v-model="conductaMercado.medidas"
           v-validate="'required'"
-          name="medida"
+          name="medidas"
         ></textarea>
         <div class="form-text">Caracteres 0/500</div>
       </div>
@@ -28,9 +28,9 @@
         <textarea
           class="form-control"
           rows="2"
-          v-model="aspectoEvaluado.control"
+          v-model="conductaMercado.controles"
           v-validate="'required'"
-          name="control"
+          name="controles"
         ></textarea>
         <div class="form-text">Caracteres 0/500</div>
       </div>
@@ -38,7 +38,7 @@
         <label>Rubro</label>
         <select
           class="form-select"
-          v-model="aspectoEvaluado.rubro"
+          v-model="conductaMercado.rubro"
           v-validate="'required'"
           name="rubro"
         >
@@ -52,7 +52,7 @@
         <label>¿Aspectos considerados relevantes por la empresa?</label>
         <select
           class="form-select"
-          v-model="aspectoEvaluado.relevante"
+          v-model="conductaMercado.relevante"
           v-validate="'required'"
           name="relevante"
         >
@@ -80,7 +80,7 @@
 export default {
   name: "FormularioAspectosEvaluados",
   props: {
-    aspectoEvaluado: { type: Object, require: true },
+    conductaMercado: { type: Object, require: true },
     aspectoConducta: { type: Array, require: true },
     rubro: { type: Array, require: true },
   },

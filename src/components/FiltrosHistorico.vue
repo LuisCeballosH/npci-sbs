@@ -35,7 +35,7 @@ export default {
     return {
       es,
       date: new Date(),
-      filtros: { month: "", year: "", userId: "00654" },
+      filtros: { month: "", year: "", codEntVigilada: "00654" },
     };
   },
   methods: {

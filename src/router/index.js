@@ -31,6 +31,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  base: '/buildapp/',
   routes
 })
 
