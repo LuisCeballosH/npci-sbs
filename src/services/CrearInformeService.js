@@ -87,7 +87,7 @@ class CrearInformeService {
     }
 
     async saveInforme(informe) {
-        console.log(informe)
+        console.log({ informe })
         const response = await http.get('/save_informe.json');
         // const response = await http.post('/npci.service/npci_api/informe_riesgos/save/informe', informe);
         return response.data;

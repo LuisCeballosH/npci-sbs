@@ -228,13 +228,13 @@
       <label>
         <strong>2.2. Riesgos asociados con la gestión del proyecto</strong>
       </label>
-      <tabla-riesgos-asociados :id="'fileOne'" />
+      <tabla-riesgos-asociados :id="'tableOne'" :gestionProdProy="'gestionProdProyOne'" />
     </div>
     <div class="mb-5">
       <label>
         <strong>2.3. Riesgos del nuevo producto o cambio importante</strong>
       </label>
-      <tabla-riesgos-asociados :id="'fileTwo'" />
+      <tabla-riesgos-asociados :id="'tableTwo'" :gestionProdProy="'gestionProdProyTwo'" />
     </div>
     <div class="mb-5">
       <label>

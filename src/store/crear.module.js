@@ -50,6 +50,8 @@ export default {
             informesRelacionados: [],
             conductasMercado: [],
             gestionProdProy: [],
+            gestionProdProyOne: [],
+            gestionProdProyTwo: [],
             riesgos: [],
             aspectos: []
         }
@@ -71,6 +73,29 @@ export default {
         },
         setInforme(state, payload) {
             if (payload) {
+                state.implicaImpacto.forEach(element => {
+                    const aspecto = payload.aspectos.find(item => item.tipoImpactAspect === element.key);
+                    if (aspecto) {
+                        element.selected = true;
+                        element.comment = aspecto.descripcion;
+                    }
+                });
+                state.incorporaAspecto.forEach(element => {
+                    const aspecto = payload.aspectos.find(item => item.tipoImpactAspect === element.key);
+                    if (aspecto) {
+                        element.selected = true;
+                        element.comment = aspecto.descripcion;
+                    }
+                });
+                state.riesgosEvaluados.forEach(element => {
+                    const riesgo = payload.riesgos.find(item => item.tipoRiesgos === element.key);
+                    element.selected = riesgo ? true : false;
+                });
+                state.opcionesCorrespondan.forEach(element => {
+                    const riesgo = payload.riesgos.find(item => item.tipoRiesgos === element.key);
+                    element.selected = riesgo ? true : false;
+                });
+
                 state.informe = payload;
             }
         },
@@ -79,7 +104,20 @@ export default {
         },
         deleteConductaMercado(state, payload) {
             state.informe.conductasMercado = state.informe.conductasMercado.filter(item => item.idCondMerc !== payload.idCondMerc);
-        }
+        },
+        setAspectos(state) {
+            state.informe.aspectos = [...state.implicaImpacto, ...state.incorporaAspecto]
+                .filter(item => item.selected).map(item => ({
+                    tipoImpactAspect: item.key,
+                    descripcion: item.comment
+                }));
+        },
+        setRiesgos(state) {
+            state.informe.riesgos = [...state.riesgosEvaluados, ...state.opcionesCorrespondan]
+                .filter(item => item.selected).map(item => ({
+                    tipoRiesgos: item.key
+                }));
+        },
     },
     actions: {
         async getData({ commit }) {
@@ -107,10 +145,15 @@ export default {
             }
         },
         async saveInforme({ commit, state }, data) {
-            console.log({ data });
             try {
+                console.log({ data });
+                commit('setAspectos');
+                commit('setRiesgos');
                 const response = await CrearInformeService.saveInforme(state.informe)
+                response.gestionProdProyOne = response.gestionProdProy.filter(item => item.tipGestProd === '001');
+                response.gestionProdProyTwo = response.gestionProdProy.filter(item => item.tipGestProd === '002');
 
+                console.log({ response });
                 if (response) {
                     commit('setInforme', response);
                 }

@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in riesgosAsociadosData" :key="index">
+          <tr v-for="(item, index) in informe[gestionProdProy]" :key="index">
             <th scope="row" class="text-center">{{ index + 1 }}</th>
             <td>{{ item.descripcion }}</td>
             <td>{{ riesgosEvaluadosValue(item.levelZero) }}</td>
@@ -114,10 +114,10 @@ export default {
   name: "TablaRiesgosAsociados",
   props: {
     id: { type: String, require: true },
+    gestionProdProy: { type: String, require: true },
   },
   data() {
     return {
-      riesgosAsociadosData: [],
       riesgoAsociado: {
         levelZero: "",
         levelOne: "",
@@ -131,6 +131,7 @@ export default {
   },
   computed: {
     ...mapState("crear", [
+      "informe",
       "riesgosEvaluados",
       "riesgosOtros",
       "riesgoRelevante",

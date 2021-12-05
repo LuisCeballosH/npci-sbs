@@ -141,7 +141,7 @@
         {
             "idGestProd": 54,
             "idInformeDet": 87,
-            "tipGestProd": "002",
+            "tipGestProd": "001",
             "descripcion": "Descripcion Gest Prod 2",
             "tipoNivel0": "004",
             "tipoNivel1": "005",
@@ -213,13 +213,13 @@
         {
             "idRiesgos": 73,
             "idInformeDet": 87,
-            "tipoRiesgos": "002",
+            "tipoRiesgos": "004001",
             "indActivo": 1
         },
         {
             "idRiesgos": 74,
             "idInformeDet": 87,
-            "tipoRiesgos": "005",
+            "tipoRiesgos": "014001",
             "indActivo": 1
         }
     ],
@@ -227,14 +227,14 @@
         {
             "idImpactAspect": 53,
             "idInformeDet": 87,
-            "tipoImpactAspect": "001",
+            "tipoImpactAspect": "003002",
             "descripcion": "DESCRIPCION 1",
             "indActivo": 1
         },
         {
             "idImpactAspect": 54,
             "idInformeDet": 87,
-            "tipoImpactAspect": "002",
+            "tipoImpactAspect": "002001",
             "descripcion": "DESCRIPCION 2",
             "indActivo": 1
         }
